@@ -15,8 +15,8 @@ def check_factual_accuracy(fact):
     client = boto3.client("bedrock-runtime", region_name="us-east-1")
     model_id = "amazon.nova-lite-v1:0"
     
-    usermassage = "ファクトチェックしてください："
-    text = usermassage + fact
+    user_message = "下記のテキストに対して、事実的な記述を抽出して、ファクトであるかどうかチェックしてください。ファクトであれば「ファクト」のみ回答してください。そうでなければ「ファクトではない」と答えて、なぜファクトではないのかを説明してください。\nテキスト："
+    text = user_message + fact
 
     # Prepare the conversation with the user message
     conversation = [
