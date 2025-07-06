@@ -30,7 +30,7 @@ def check_factual_accuracy(fact):
         response = client.converse(
             modelId=model_id,
             messages=conversation,
-            inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+            inferenceConfig={"maxTokens": 1024, "temperature": 0.5, "topP": 0.9},
         )
 
         response_text = response["output"]["message"]["content"][0]["text"]
@@ -42,7 +42,8 @@ def check_factual_accuracy(fact):
 def process_and_check_facts(texts):
     """Process extracted texts and check factual accuracy."""
     # Filter objective statements
-    objective_statements = filter_objective_statements(texts)
+    #objective_statements = filter_objective_statements(texts)
+    objective_statements = texts  # For now, assume all texts are objective statements
     
     # Perform fact-checking on each statement
     results = {}

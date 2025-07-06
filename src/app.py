@@ -16,19 +16,22 @@ def main():
             st.subheader("Extracted Text:")
             for i, text in enumerate(slides_text):
                 st.write(f"Slide/Page {i + 1}: {text}")
-            
+
             estimated_cost = estimate_api_cost(slides_text)
             st.write(f"Estimated API cost: ${estimated_cost:.6f}")
 
-            # Check factual accuracy of the extracted text
+                # Check factual accuracy of the extracted text
             if st.button("Check Factual Accuracy"):
-                st.subheader("Processing and Filtering Objective Statements...")
-                results = process_and_check_facts(slides_text)
-                
-                st.subheader("Factual Accuracy Results:")
-                for statement, result in results.items():
-                    st.write(f"Statement: {statement}")
-                    st.write(f"Result: {result}")
+                for i, text in enumerate(slides_text):
+                    st.subheader(f"Processing Slide/Page {i + 1}")
+                    results = process_and_check_facts([text])  # 传入单页内容，需用列表包裹
+                    st.subheader("Factual Accuracy Results:")
+                    for statement, result in results.items():
+                        st.write(f"Statement: {statement}")
+                        st.write(f"Result: {result}")
+
+
+
         else:
             st.warning("No text found in the uploaded file.")
 
